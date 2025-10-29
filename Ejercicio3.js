@@ -31,6 +31,7 @@ const buscarPelicula = async (nombrePelicula) => {
 };
 
 buscarPelicula("Oppenheimer");
+<p>Cambio realizado por Juan Rodriguez</p>
 
   
 
