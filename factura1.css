@@ -693,18 +693,4 @@ position: relative;
     right: 4%;
   }
 
-  .text1{
-  position: relative;
-  padding: 0 !important;
-  margin: 0;
-
-}
-
-  .t2{
-    border-spacing: 0 50px ;
-  }
-
-  .three table{
-    border-spacing: 50px 20px;
-  }
-}
+  
