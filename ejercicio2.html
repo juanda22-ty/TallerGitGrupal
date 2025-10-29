@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factura restaurante</title>
+</head>
+
+<body style="display: flex; justify-content: center; background-color: #e7e7e7; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
+    <div style="display: flex; flex-direction: column; ">
+        <h1 style="text-align: center; font-weight: bolder;">Factura restaurante</h1>
+        <div style="background-color: rgb(255, 255, 255); display: flex; flex-direction: column; justify-content: center; border: 1px solid rgb(255, 102, 0); padding: 30px; border-radius: 10px; color: rgb(0, 0, 0); text-align: center;">
+
+            <input style="margin-bottom: 30px; text-align: center;" type="number" id="precio" placeholder="Subtotal" min="0.01" step="0.01">
+            
+            <div style="text-align: left; margin: 0 auto; margin-bottom: 20px;">
+                <input style="width: auto;" type="radio" name="descuento" id="noSocio" value="0" checked>
+                <label for="noSocio">No socio — Descuento 0%</label><br>
+
+                <input style="width: auto;" type="radio" name="descuento" id="estandar" value="5">
+                <label for="estandar">Socio Estándar — Descuento 5%</label><br>
+
+                <input style="width: auto;" type="radio" name="descuento" id="premium" value="12">
+                <label for="premium">Socio Premium — Descuento 12%</label><br>
+            </div>
+
+            <button style="font-size: 15px; border-radius: 10px; border: rgb(255, 102, 0) 1px solid;" onclick="calcularTotal()">Calcular cuenta total</button>
+            <h2 id="resultado"></h2>
+
+            <script>
+                function calcularTotal() {
+                    const precioInput = document.getElementById("precio").value;
+                    const subtotal = parseFloat(precioInput);
+
+                    const resultadoEl = document.getElementById("resultado");
+
+                    if (isNaN(subtotal) || subtotal <= 0) {
+                        resultadoEl.style.color = "red";
+                        resultadoEl.textContent = "Ingrese un subtotal válido mayor que 0.";
+                        return;
+                    }
+
+                    const propina = subtotal * 0.10;
+                    const iva = subtotal * 0.11;     
+
+                    const descuentoRate = parseFloat(document.querySelector('input[name="descuento"]:checked').value);
+                    const descuento = subtotal * (descuentoRate / 100);
+
+                    const totalFinal = subtotal + propina + iva - descuento;
+
+                    resultadoEl.style.color = "black";
+                    resultadoEl
+                    resultadoEl.innerHTML =
+                        "Subtotal: $" + subtotal.toFixed(2) + "<br>" +
+                        "Propina (10%): $" + propina.toFixed(2) + "<br>" +
+                        "IVA (11%): $" + iva.toFixed(2) + "<br>" +
+                        "Descuento (" + descuentoRate + "%): -$" + descuento.toFixed(2) + "<br><br>" +
+                        "<strong>Total Final a Pagar: $" + totalFinal.toFixed(2) + "</strong>";
+                }
+            </script>
+
+            <style>
+                label,
+                input {
+                    width: 400px;
+                    margin: 0px 0px 10px 0;
+                }
+
+                button {
+                    padding: 8px;
+                    border: 2px solid green;
+                    width: 200px;
+                    margin: 10px auto;
+                }
+
+                input[type="number"] {
+                    padding: 5px;
+                }
+            </style>
+
+        </div>
+    </div>
+</body>
+
+</html>
